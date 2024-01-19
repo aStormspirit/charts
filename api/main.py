@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from get_data import data
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
+
 
 app = FastAPI()
 
@@ -20,4 +22,5 @@ app.add_middleware(
 
 @app.get("/")
 def read_root() -> dict:
-    return {"data": data()}
+    return {"data": data(), "date": datetime.now().strftime("%d.%m.%Y")
+}
