@@ -30,6 +30,7 @@ COPY . .
 # Expose the port that FastApi will be running on
 EXPOSE 8000
 
+RUN python3 /app/download.py
 # Даем права на выполнение скрипта
 RUN chmod +x ./script.sh
 

@@ -115,7 +115,7 @@ function App() {
   ];
 
   useEffect(() => {
-    fetch("http://5.53.126.46:8000/data")
+    fetch("https://chartsplugin.ddns.net/data")
       .then((res) => res.json())
       .then((json) => {
         setData(json.data);
