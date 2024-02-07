@@ -1,8 +1,6 @@
 from fastapi import FastAPI
-from get_data import data
+from react import serve_react_app
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
-
 
 app = FastAPI()
 
@@ -20,7 +18,5 @@ app.add_middleware(
     expose_headers=["Referer"],
 )
 
-@app.get("/")
-def read_root() -> dict:
-    return {"data": data(), "date": datetime.now().strftime("%d.%m.%Y")
-}
+path_to_react_app_build_dir = "./build"
+app = serve_react_app(app, path_to_react_app_build_dir)

@@ -3,8 +3,8 @@ from datetime import datetime
 
 # Здесь используются примерные имена куков и их значения, полученные из браузера. 
 cookies = {
-    'sessionid': 'ybwikj7fkx4kdcdmjk50cxlwqdq7vq13',
-    'csrftoken': 'pCaQCkrR0JJmZcIbyOSiazOFs4YmklYr',
+    'sessionid': 'fy3pf2jc47e1t1dz98hrmr4lxcs0xlfc',
+    'csrftoken': 'SqQfNu5Upj9caUM2az3X2l1wPBXMlN4o',
 }
 
 # Эти заголовки могут потребоваться, если сервер проверяет наличие определенных заголовков.

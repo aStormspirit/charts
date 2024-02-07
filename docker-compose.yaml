@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   api:
     build:
       context: ./api
@@ -10,14 +11,17 @@ services:
       - '8000:8000'
     networks:
       - app-network
-  charts:
-    build:
-      context: ./charts
-      dockerfile: Dockerfile
+
+  nginx:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
     ports:
-      - '3000:80'
-    depends_on:
-      - api
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
     networks:
       - app-network
 

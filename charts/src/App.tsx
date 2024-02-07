@@ -23,7 +23,7 @@ function App() {
   const [data, setData] = useState<CallLog | []>([]);
   const [date, setDate] = useState<string>("");
 
-  const xValue = Object.keys(data);
+  const xValue = Object.keys(data).map((item) => item.split(" ")[0]);
   const yValue = Object.values(data).map((item: CallEntry[]) => item.length);
 
   function calculateTotalTime(callLogs: any): { [key: string]: string } {
@@ -115,7 +115,7 @@ function App() {
   ];
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/")
+    fetch("http://5.53.126.46:8000/data")
       .then((res) => res.json())
       .then((json) => {
         setData(json.data);
