@@ -3,13 +3,13 @@ from datetime import datetime
 
 # Здесь используются примерные имена куков и их значения, полученные из браузера. 
 cookies = {
-    'sessionid': 'fy3pf2jc47e1t1dz98hrmr4lxcs0xlfc',
-    'csrftoken': 'SqQfNu5Upj9caUM2az3X2l1wPBXMlN4o',
+    'sessionid': 'qsvv7boxeg90igzp8v0yeleshv34qscg',
+    'csrftoken': 'LO1r3aC6d7Qt6PhdiRvycpp2NahKV79r',
 }
 
 # Эти заголовки могут потребоваться, если сервер проверяет наличие определенных заголовков.
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0',
     # Другие заголовки при необходимости
 }
  
