@@ -1,6 +1,7 @@
 import "./App.css";
 import Plot from "react-plotly.js";
 import { useState, useEffect } from "react";
+import { calculateTotalTime } from "./utils";
 
 type CallEntry = [
   string,
@@ -26,36 +27,6 @@ function App() {
   const xValue = Object.keys(data).map((item) => item.split(" ")[0]);
   const yValue = Object.values(data).map((item: CallEntry[]) => item.length);
 
-  function calculateTotalTime(callLogs: any): { [key: string]: string } {
-    const totalTime: { [key: string]: string } = {};
-
-    for (const key in callLogs) {
-      const callEntries = callLogs[key];
-
-      let totalSeconds = 0;
-      for (const entry of callEntries) {
-        const duration = entry[6];
-        const durationParts = duration.split(":");
-        const hours = parseInt(durationParts[0]);
-        const minutes = parseInt(durationParts[1]);
-        const seconds = parseInt(durationParts[2]);
-
-        totalSeconds += hours * 3600 + minutes * 60 + seconds;
-      }
-
-      const totalHours = Math.floor(totalSeconds / 3600);
-      const totalMinutes = Math.floor((totalSeconds % 3600) / 60);
-      const totalSecondsLeft = totalSeconds % 60;
-
-      totalTime[key] = `${totalHours.toString().padStart(2, "0")}:${totalMinutes
-        .toString()
-        .padStart(2, "0")}:${totalSecondsLeft.toString().padStart(2, "0")}`;
-    }
-
-    return totalTime;
-  }
-  const sumTime = calculateTotalTime(data);
-
   const entryCount = Object.values(data).map(
     (item: CallEntry[]) => item.length
   );
@@ -66,9 +37,7 @@ function App() {
     mergedArray.push([entryCount[i], conversationDuration[i]]);
   }
 
-  console.log(mergedArray);
-
-  var layout = {
+  const layout = {
     title: {
       text: "Звонки за " + date,
       font: {
@@ -85,7 +54,7 @@ function App() {
       },
     },
     yaxis: {
-      title: "Колличество звонков",
+      title: "Количество звонков",
       titlefont: {
         size: 18,
       },
@@ -99,7 +68,7 @@ function App() {
     {
       type: "bar",
       x: xValue,
-      y: Object.values(data).map((item: CallEntry[]) => item.length),
+      y: yValue,
       hoverinfo: "none",
       text: mergedArray.map((item) => `${item[0]} | ${item[1]}`),
       textposition: "auto",
@@ -120,6 +89,9 @@ function App() {
       .then((json) => {
         setData(json.data);
         setDate(json.date);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 

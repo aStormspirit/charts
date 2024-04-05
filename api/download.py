@@ -1,10 +1,11 @@
 import requests
 from datetime import datetime
+import json
 
 # Здесь используются примерные имена куков и их значения, полученные из браузера. 
 cookies = {
-    'sessionid': 'qsvv7boxeg90igzp8v0yeleshv34qscg',
-    'csrftoken': 'LO1r3aC6d7Qt6PhdiRvycpp2NahKV79r',
+    'sessionid': 'ugm2d1hb7ahjdifccw6uasyrgrdorib2',
+    'csrftoken': 'Qmx6IPFKK9mc6LNVF3hNG3cGALrTibpb',
 }
 
 # Эти заголовки могут потребоваться, если сервер проверяет наличие определенных заголовков.
@@ -23,11 +24,19 @@ with requests.Session() as session:
     session.headers.update(headers)
     
     response = session.get(url)
+    data_str = response.content.decode('utf-8')
+
+    # Преобразуем строку в формат Python
+    data = json.loads(data_str)
+
+    # Получаем значение task_id
+    task_id = data['task_id']
+    response2 = session.get(f'https://kubatura.moizvonki.ru/calls/export_result_download/?task_id={task_id}')
 
     if response.status_code == 200:
         # Запишите содержимое в файл
         with open(file_name, 'wb') as file:
-            file.write(response.content)
+            file.write(response2.content)
         print(f'Файл "{file_name}" успешно загружен.')
     else:
         print(f'Ошибка при загрузке файла: статус код {response.status_code}')
